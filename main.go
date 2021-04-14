@@ -11,7 +11,7 @@ import (
 )
 
 var lock = &sync.Mutex{}
-var username = flag.String("u", "", "username")
+var email = flag.String("e", "", "email")
 var password = flag.String("p", "", "password")
 
 func main() {
@@ -59,7 +59,7 @@ func login() {
 
 	page := browser.MustPage("https://passport.futunn.com/?target=https%3A%2F%2Fwww.futunn.com%2Faccount%2Fhome&lang=zh-hk#login")
 
-	page.MustElement(`input[name=email]`).MustInput(*username)
+	page.MustElement(`input[name=email]`).MustInput(*email)
 	page.MustElement(`input[name=password]`).MustInput(*password).MustPress(input.Enter)
 
 	page.Race().Element(".nn-header-account").MustHandle(func(e *rod.Element) {
